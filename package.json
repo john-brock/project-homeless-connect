@@ -1,0 +1,21 @@
+{
+  "name": "project-homeless-connect",
+  "version": "0.0.0",
+  "description": "SFDC PHC Voluneteer app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/john-brock/project-homeless-connect.git"
+  },
+  "dependencies": {
+    "express": "~3.4.8",
+    "nforce": "~0.7.0-beta.1"
+  },
+  "keywords": [
+    "sfdc",
+    "heroku"
+  ]
+}
