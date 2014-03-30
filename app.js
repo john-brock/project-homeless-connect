@@ -19,7 +19,7 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(express.cookieParser());
   app.use(express.session({ secret: 'nforce testing baby' }));
-  app.use(org.expressOAuth({onSuccess: '/success', onError: '/oauth/error'}));
+  app.use(org.expressOAuth({onSuccess: '/userinfo', onError: '/oauth/error'}));
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
 });
@@ -37,12 +37,60 @@ app.get('/', function(req, res){
   res.send('Hello');
 });
 
-app.get('/oauth/authorize', function(req, res){
+app.get('/login', function(req, res){
+  /*org.authenticate({username: un, password: pw}, function(err, resp) {
+    if(err) {
+      res.send(err.message);
+    } else {
+      res.json(resp);
+    }
+  });*/
   res.redirect(org.getAuthUri());
 });
 
-app.get('/success', function(req, res) {
-  res.send(req.session.oauth);
+app.get('/userinfo', function(req, res) {
+  org.getIdentity({oauth: req.session.oauth}, function(err, resp) {
+    if(err) {
+      res.send(err.message);
+    } else {
+      res.send(resp);
+    }
+  });
+});
+
+app.get('/register', function(req, res) {
+  var user = req.user;
+  /*var user = {
+    "username":"jbrock@phctest3.com",
+    "nickname":"jbrock@phctest3.com",
+    "email":"jbrock@salesforce.com",
+    "password":"test1234",
+    "confirmPassword":"test1234"
+  };*/
+  org.apexRest({uri:'register',method:'POST', body: JSON.stringify(user)}, function(err, resp) {
+    if(err) {
+      res.send(err.message);
+    } else {
+      res.send(resp);
+    }
+  });
+});
+
+app.get('/password/change', function(req, res) {
+  //var info = req.password;
+  var idString = JSON.stringify(req.session.oauth.id);
+  var userId = idString.substring(idString.length - 19, idString.length-1);
+  var info = {
+    "userId":userId,
+    "newPassword":"test1test"
+  };
+  org.apexRest({uri:'password/reset',method:'POST',body:JSON.stringify(info)}, function(err, resp) {
+    if(err) {
+      res.send(err.message);
+    } else {
+      res.send(resp);
+    }
+  });
 });
 
 app.get('/test/query', function(req, res) {
