@@ -17,7 +17,7 @@ Run the local node server:
     $ node app.js
 
 
-Open `localhost:3000` in [Chrome Canary](https://www.google.com/intl/en/chrome/browser/canary.html) with flags to allow cross domain origin calls:
+Open `localhost:5000` in [Chrome Canary](https://www.google.com/intl/en/chrome/browser/canary.html) with flags to allow cross domain origin calls:
 
     $ open -a /Applications/Google\ Chrome\ Canary.app --args --allow-file-access-from-files --disable-web-security
 
