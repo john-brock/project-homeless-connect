@@ -11,33 +11,29 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 */
 (function(){
 
-  var myApp = angular.module('app', ['ngTouch', 'ngAnimate', 'ngRoute']);
+  var homeController = function($rootScope, $scope, appModel, userService){
+    console.log('new homeController!!');
 
-  angular.module('app.directives', ['app.directives']);
+    // make appModel available to all scopes
+    $rootScope.appModel = appModel;
 
-  // Controllers
-  myApp.controller('appController', require('./controller/appController'));
-  myApp.controller('registrationController', require('./controller/registrationController'));
-  myApp.controller('homeController', require('./controller/homeController'));
+    $scope.world = "Salesforce UX"
 
-  // Models
-  myApp.service('appModel', require('./model/appModel'));
-  myApp.service('userService', require('./service/userService'));
-
-  // Directives
-  myApp.directive('appHeader', require('./directive/header'));
-  myApp.directive('register', require('./directive/register'));
-
-  myApp.config(['$routeProvider',
-  function($routeProvider) {
-    $routeProvider.
-      when('/', {
-        templateUrl: 'views/home.html',
-        controller : 'homeController'
-      }).
-      otherwise({
-        redirectTo: '/'
+    userService.getUserInfo().success(function(result){
+        appModel.user = result;
+      }).error(function(err){
+        console.log(err);
       });
-  }]);
+
+  }
+
+  homeController.$inject = [
+    '$rootScope',
+    '$scope',
+    'appModel',
+    'userService'
+  ];
+
+  module.exports = homeController;
 
 }).call(this);

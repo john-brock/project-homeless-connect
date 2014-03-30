@@ -11,33 +11,43 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 */
 (function(){
 
-  var myApp = angular.module('app', ['ngTouch', 'ngAnimate', 'ngRoute']);
+  var registrationController = function($rootScope, $scope, $element, appModel, userService){
+    console.log('new registrationController!!');
 
-  angular.module('app.directives', ['app.directives']);
+    // make appModel available to all scopes
+    $rootScope.appModel = appModel;
 
-  // Controllers
-  myApp.controller('appController', require('./controller/appController'));
-  myApp.controller('registrationController', require('./controller/registrationController'));
-  myApp.controller('homeController', require('./controller/homeController'));
+    $scope.world = "Salesforce UX"
 
-  // Models
-  myApp.service('appModel', require('./model/appModel'));
-  myApp.service('userService', require('./service/userService'));
+    $scope.user = {
+      "username" : "",
+      "email" : "",
+      "password" : "",
+      "confirmPassword" : "",
+      "nickname" : ""
+    };
 
-  // Directives
-  myApp.directive('appHeader', require('./directive/header'));
-  myApp.directive('register', require('./directive/register'));
+    $scope.$watch('user', function(n,o){
+      $scope.user.username = $scope.user.email;
+      // console.log($scope.user);
+    }, true);
+    
+    $scope.submit = function(){
+      userService.registerUser(function(result){
+        console.log(result);
+      }, $scope.user);  
+    };
+    
+  }
 
-  myApp.config(['$routeProvider',
-  function($routeProvider) {
-    $routeProvider.
-      when('/', {
-        templateUrl: 'views/home.html',
-        controller : 'homeController'
-      }).
-      otherwise({
-        redirectTo: '/'
-      });
-  }]);
+  registrationController.$inject = [
+    '$rootScope',
+    '$scope',
+    '$element',
+    'appModel',
+    'userService'
+  ];
+
+  module.exports = registrationController;
 
 }).call(this);

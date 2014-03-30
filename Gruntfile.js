@@ -53,6 +53,7 @@ module.exports = function(grunt) {
       html: {
         files: ['src/html/*', 'src/html/**/*.html'],
         tasks: ['ngtemplates', 'reload'],
+        expand: true,
         options: {
           nospawn: true
         }
@@ -71,7 +72,7 @@ module.exports = function(grunt) {
         options: {
           base: 'src/html/'
         },
-        src: ['src/html/**.html'],
+        src: ['src/html/**/*.html'],
         dest: 'www/ng-templates.js'
       }
     },

@@ -19,7 +19,7 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(express.cookieParser());
   app.use(express.session({ secret: 'nforce testing baby' }));
-  app.use(org.expressOAuth({onSuccess: '/userinfo', onError: '/oauth/error'}));
+  app.use(org.expressOAuth({onSuccess: '/', onError: '/oauth/error'}));
   app.use(app.router);
   app.use(express.static(__dirname + '/www'));
 });
@@ -58,8 +58,9 @@ app.get('/userinfo', function(req, res) {
   });
 });
 
-app.get('/register', function(req, res) {
-  var user = req.user;
+app.post('/register', function(req, res) {
+  var user = req.body.params;
+  console.log(user);
   /*var user = {
     "username":"jbrock@phctest3.com",
     "nickname":"jbrock@phctest3.com",
