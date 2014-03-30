@@ -10,6 +10,7 @@
 
   <!-- Custom CSS -->
   <link href="styles.css" rel="stylesheet" type="text/css">
+  <link href="pure-min.css" rel="stylesheet" type="text/css">
 
   <!-- Bower libs -->
   <script src="libs.js"></script>
@@ -22,8 +23,14 @@
 
 </head>
 
-<body ng-controller="appController">
-  <app-header></app-header>
-  Hello {{world}}
+<body> <!-- ng-controller="appController"> -->
+  <!-- <app-header></app-header>
+  Hello {{world}} -->
+
+  <register></register>
+
+  <a href="/login" alt="" >Login using oAuth setup</a>
+
+  <div ng-view></div>
 </body>
 </html>
