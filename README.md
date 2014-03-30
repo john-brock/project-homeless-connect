@@ -40,3 +40,8 @@ Edit `src/index.html` and be aware to never change the `www/index.html` since it
 ### CSS
 
 Edit `src/sass/styles.scss`.
+
+### Salesforce APIs
+
+Upload projectHomelessConnect.zip to salesforce org using `https://workbench.developerforce.com`. Assign the permission set included in the zip to the user associated with the public site to grant access to the APIs. (find the user by navigating to the site setup page, clicking public access settings, then on the profile click assigned users, then select the Guest User -- assign the permission set.
+
