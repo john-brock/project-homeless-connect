@@ -18,7 +18,7 @@ app.configure(function(){
   app.use(express.urlencoded());
   app.use(express.methodOverride());
   app.use(express.cookieParser());
-  app.use(express.session({ secret: 'nforce testing baby' }));
+  app.use(express.session({ secret: 'ProjectHomelessConnect-Secret' }));
   app.use(org.expressOAuth({onSuccess: '/userinfo', onError: '/oauth/error'}));
   app.use(app.router);
   app.use(express.static(__dirname + '/www'));
@@ -38,13 +38,6 @@ app.get('/hello', function(req, res){
 });
 
 app.get('/login', function(req, res){
-  /*org.authenticate({username: un, password: pw}, function(err, resp) {
-    if(err) {
-      res.send(err.message);
-    } else {
-      res.json(resp);
-    }
-  });*/
   res.redirect(org.getAuthUri());
 });
 
@@ -84,7 +77,7 @@ app.get('/password/change', function(req, res) {
     "userId":userId,
     "newPassword":"test1test"
   };
-  org.apexRest({uri:'password/reset',method:'POST',body:JSON.stringify(info)}, function(err, resp) {
+  org.apexRest({uri:'password/change',method:'POST',body:JSON.stringify(info)}, function(err, resp) {
     if(err) {
       res.send(err.message);
     } else {
@@ -93,13 +86,16 @@ app.get('/password/change', function(req, res) {
   });
 });
 
-app.get('/test/query', function(req, res) {
-  var query = 'SELECT Id, Name, CreatedDate FROM Account ORDER BY CreatedDate DESC LIMIT 5';
-  org.query({query: query, oauth: req.session.oauth}, function(err, resp) {
-    if(!err) {
-      res.send(resp.records);
-    } else {
+app.get('/password/reset', function(req, res) {
+  //var username = req.user.username;
+  var user = {
+    "username":"jbrock@phc.com"
+  }
+  org.apexRest({uri:'password/reset',method:'POST',body:JSON.stringify(user)}, function(err, resp) {
+    if(err) {
       res.send(err.message);
+    } else {
+      res.send(resp);
     }
   });
 });
