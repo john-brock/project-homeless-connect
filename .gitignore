@@ -30,3 +30,6 @@ node_modules/*
 #for all the vim swap files
 *.swp
 
+www/*
+vendor/*
+bower_components/*

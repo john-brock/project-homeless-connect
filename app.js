@@ -13,7 +13,7 @@ var port = Number(process.env.PORT || 5000);
 
 // Configuration
 app.configure(function(){
-  app.set('views', __dirname + '/views');
+	//app.set('views', __dirname + '/views');
   app.use(express.json());
   app.use(express.urlencoded());
   app.use(express.methodOverride());
@@ -21,7 +21,7 @@ app.configure(function(){
   app.use(express.session({ secret: 'nforce testing baby' }));
   app.use(org.expressOAuth({onSuccess: '/success', onError: '/oauth/error'}));
   app.use(app.router);
-  app.use(express.static(__dirname + '/public'));
+  app.use(express.static(__dirname + '/www'));
 });
 
 app.configure('development', function(){
@@ -33,7 +33,7 @@ app.configure('production', function(){
 });
 
 // Routes
-app.get('/', function(req, res){
+app.get('/hello', function(req, res){
   res.send('Hello');
 });
 
