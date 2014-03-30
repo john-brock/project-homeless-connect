@@ -6,7 +6,7 @@ PHC Volunteer App
 
 ## Setup
     $ git clone https://github.com/john-brock/project-homeless-connect.git
-    $ cd s1proto
+    $ cd project-homeless-connect
     $ npm install
     $ grunt
 
