@@ -22,6 +22,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
   myApp.service('appModel', require('./model/appModel'));
 
   // Directives
-  myApp.directive('foo', require('./directive/foo'));
+  myApp.directive('header', require('./directive/header'));
 
 }).call(this);

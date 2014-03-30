@@ -124,4 +124,3 @@ module.exports = function(grunt) {
   });
   return grunt.registerTask('default', ['clean', 'bower', 'index', 'copy', 'concat', 'ngtemplates', 'node-sass', 'browserify', 'reload', 'watch']);
 };
-
