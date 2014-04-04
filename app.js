@@ -4,8 +4,8 @@ var nforce = require('nforce');
 var app = module.exports = express();
 
 var org = nforce.createConnection({
-  clientId: '3MVG98RqVesxRgQ4FWNuASfzkkMk7Q4GoirDGWu4B26dRYAAXQPOX581mVxmCeTzCMnQpBlUUJ45bRpMd9lHs',
-  clientSecret: '8077703699761074725',
+  clientId: ' CONSUMER ID ',
+  clientSecret: ' CONSUMER SECRET ',
   redirectUri: 'http://localhost:5000/oauth/_callback'
 });
 
